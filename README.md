@@ -18,7 +18,7 @@ push_to_analytics.py: A Python 3.10 script (using the requests library) that pro
 
 The GitHub Actions workflow is designed to be triggered in two ways:
 
-Scheduled Execution: Runs automatically on a daily cron schedule. It is configured to run at 11:12 AM IST (using the Asia/Kolkata timezone) with a slight offset to bypass top-of-the-hour server queue delays on GitHub.
+Scheduled Execution: Runs automatically on a daily cron schedule. It is configured to run at 05:02 AM IST (using the Asia/Kolkata timezone) with a slight offset to bypass top-of-the-hour server queue delays on GitHub.
 
 Manual Execution: Can be triggered on-demand using the workflow_dispatch event directly from the GitHub Actions tab.
 
