@@ -1,4 +1,4 @@
-name: Zoho Analytics Stock Sync
+name: Zoho Stock Sync
 
 on:
   schedule:
