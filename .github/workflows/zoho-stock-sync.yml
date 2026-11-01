@@ -1,0 +1,38 @@
+name: Zoho Analytics Stock Sync
+
+on:
+  schedule:
+    - cron: '56 14 * * *'
+      timezone: 'Asia/Kolkata'
+  workflow_dispatch:
+
+jobs:
+  sync-stock-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Pull Stock Data (Bash)
+        env:
+          ZOHO_CLIENT_ID: ${{ secrets.ZOHO_CLIENT_ID }}
+          ZOHO_CLIENT_SECRET: ${{ secrets.ZOHO_CLIENT_SECRET }}
+          ZOHO_INVENTORY_REFRESH_TOKEN: ${{ secrets.ZOHO_INVENTORY_REFRESH_TOKEN }}
+        run: |
+          chmod +x pull_stock.sh
+          ./pull_stock.sh
+
+      - name: Push Data to Analytics (Python)
+        env:
+          ZOHO_CLIENT_ID: ${{ secrets.ZOHO_CLIENT_ID }}
+          ZOHO_CLIENT_SECRET: ${{ secrets.ZOHO_CLIENT_SECRET }}
+          ZOHO_ANALYTICS_REFRESH_TOKEN: ${{ secrets.ZOHO_ANALYTICS_REFRESH_TOKEN }}
+        run: python push_to_analytics.py
