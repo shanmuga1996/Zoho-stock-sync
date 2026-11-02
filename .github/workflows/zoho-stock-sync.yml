@@ -2,7 +2,7 @@ name: Zoho Stock Sync
 
 on:
   schedule:
-    - cron: '2 5 * * *'
+    - cron: '40 2 * * *'
       timezone: 'Asia/Kolkata'
   workflow_dispatch:
 
